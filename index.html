@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="Developer" content="Kaipa uday kumar reddy">
+  <meta name="Developer freelancer profile" content="https://www.freelancer.com/u/udayreddykaipa">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AUDIO GHOST</title>
+  <link rel="icon" href="" type="image/gif" sizes="20x20">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <div id="message">
+    <div style="text-align: center;">
+      <h2>Welcome</h2>
+    </div>
+    <DIV style="text-align: center;">
+      <h1>Audio Ghost</h1>
+    </DIV>
+    <div style="text-align: center;padding: 1%;">
+      <div style="padding: 1%;">
+        <input type="text" placeholder="Email Id" id="mail" class="form-control"
+          style="width: 100%;background-color: bisque" required>
+      </div>
+    </div>
+    <div style="text-align: center;padding: 1%;"></div>
+    <div style="padding: 1%;">
+      <input type="password" placeholder="Password" id="pwd" class="form-control"
+        style="width: 100%;background-color: bisque" required>
+    </div>
+    <div>
+      <button type="button" class="btn " data-toggle="modal" data-target="#exampleModal" id="reset">
+        Forgot password?
+      </button>
+    </div>
+    <div style="text-align: center;">
+      <button class="btn btn-primary" id="login">Sign In</button>
+    </div>
+  </div>
+  <p id="load"> <a href="reg.html">New here !, Click here to Register.</a></p>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="padding: 1%;">
+            <input type="text" placeholder="Email Id" id="resetmail" class="form-control"
+              style="width: 100%;background-color: bisque" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="sendresetlink">Send Reset Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: absolute;top: 8%;right: 3%;">
+    <div class="toast" id="toast">
+      <div class="toast-header">
+        <strong class="mr-auto"> <img src="HappyFramesLogoWEB.webp" alt=""
+            style="width: 15px;height: 15px;">&nbsp;Alert</strong>
+        <small>NOW</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        <label id="alertmsg" style="color: darkgoldenrod;"> Welcome to admin panel</label>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+  <script defer src="https://www.gstatic.com/firebase/init.js"></script>
+  <script src="init.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        window.location.replace('main.html')
+      }
+    })
+
+    document.getElementById('reset').addEventListener('click', () => {
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+      })
+    })
+
+    document.getElementById('sendresetlink').addEventListener('click', () => {
+      firebase.auth().sendPasswordResetEmail(document.getElementById('resetmail').value).then(function () {
+        $(document).ready(function () {
+          $('.toast').toast({ delay: 3000 })
+          $('#alertmsg').html('Password reset link Email sent ' + document.getElementById('resetmail').value)
+          $('.toast').toast('show');
+        });
+      }).catch(function (error) {
+        $(document).ready(function () {
+          $('.toast').toast({ delay: 3000 })
+          $('#alertmsg').html('Error :' + error)
+          $('.toast').toast('show');
+        });
+      });
+      $('#exampleModal').modal('hide')
+
+    })
+    document.getElementById('login').addEventListener('click', () => {
+      console.log('login clicked- Local persistance')
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function () {
+          return firebase.auth().signInWithEmailAndPassword(document.getElementById('mail').value, document.getElementById('pwd').value);
+        })
+        .catch(function (error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          $(document).ready(function () {
+          $('.toast').toast({ delay: 3000 })
+          $('#alertmsg').html('Error :' + errorCode+','+errorMessage)
+          $('.toast').toast('show');
+        });
+        });
+
+    })
+  </script>
+
+
+</body>
+
+</html>

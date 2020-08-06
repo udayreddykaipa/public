@@ -1,0 +1,108 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+</head>
+
+<body>
+    3.3.1.0
+    <div style="text-align: right;padding: 1%;">
+        <div>
+            <button class="btn btn-danger" id="livebtn" onclick="live()">LIVE Mode</button>
+            <button class="btn btn-primary" id="linkNew">Link New Device</button>
+            <label for="RecordingDate">Choose Date</label>
+            <input class="form-input" type="date" name="selDate" id="RecordingDate"> <button class="btn btn-primary"
+                id="signout">sign out</button>
+        </div>
+    </div>
+    <div style="padding: 1%;">
+        <select class="form-control form-control-sm" name="devices-list" id="devices-list" style="width: 15%;">
+            <option value="0" selected disabled id="devices-list-option">loading.. </option>
+        </select>
+    </div>
+    <audio controls id="S">
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div>
+        <p id="loading"></p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Link Device</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="padding: 1%;">
+                        <input type="number" placeholder="Enter Device Id" id="DevId" class="form-control"
+                            style="width: 100%;background-color: bisque" required>
+                    </div>
+                    <div style="padding: 1%;">
+                        <input type="text" placeholder="Set Device Password" id="DevPwd" class="form-control"
+                            style="width: 100%;background-color: bisque" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="confirmlink">Validate Credentials</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- toast bootstrap -->
+    <div style="position: absolute;top: 8%;right: 3%;">
+        <div class="toast" id="toast">
+            <div class="toast-header">
+                <strong class="mr-auto"> <img src="" alt="" style="width: 15px;height: 15px;">&nbsp;Alert</strong>
+                <small>NOW</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <label id="alertmsg" style="color: darkgoldenrod;"> Welcome to admin panel</label>
+            </div>
+        </div>
+    </div>
+
+    <div id="watchdiv" style='visibility:hidden;width:0;height:0'>0</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+    <!-- <script defer src="https://www.gstatic.com/firebase/init.js"></script> -->
+    <script src="init.js"></script>
+    <script src="my.js"></script>
+</body>
+
+</html>
