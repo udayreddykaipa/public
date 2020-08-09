@@ -22,8 +22,8 @@ function live() {
     console.log('')
     var i = 0;
     var dataq = ''
-    firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + '100720' + '/Online/').set(null)
-    const database = firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + '100720' + '/Online/').on('child_added', (sn) => {
+    firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + dt + '/Online/').set(null)
+    const database = firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + dt + '/Online/').on('child_added', (sn) => {
         // console.log('snapshot loaded')
         dataq = dataq + sn.val().toString().replace("Data:", "")
         i = i + 1
@@ -165,7 +165,7 @@ function reloadAud() {
     var selecedDev = document.getElementById('devices-list').value
     console.log(dt, selecedDev)
     var i=0
-    audio.src="data:audio/wav;base64,"
+    // audio.src="data:audio/wav;base64,"
     firebase.database().ref(selecedDev + '/Audio/' + dt + '/Recorded/').once('value', function (snapshot) {
         // console.log(snapshot.key,snapshot.val(),sn.val(),dt)
         snapshot.forEach(element => {
@@ -173,16 +173,16 @@ function reloadAud() {
             data1 = data1 + element.val().toString().replace("Data:", "")
             // data1 =  element.val().toString().replace("Data:", "")  
             console.log(data1.length,i)
-            if(i>=10){
-                audio.src=audio.src+data1
-                data1=''
-                i=0
-            }
+            // if(i>=10){
+                // audio.src=audio.src+data1
+            //     data1=''
+            //     i=0
+            // }
 
         }
         );
         // console.log(data1, data1.length)
-        // audio.src="data:audio/wav;base64,"+data1
+        audio.src="data:audio/wav;base64,"+data1
         if (data1 == "") {
             document.getElementById('loading').innerHTML = 'No Recording found, Choose a different date or Valid Device'
         }
