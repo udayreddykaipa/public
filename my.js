@@ -36,7 +36,7 @@ function live() {
                     audio.src = "data:audio/wav;base64," + sn.val().toString().replace("Data:", "")
                     audio.play()
                     console.log(f + 'new')
-                    snkey = (parseInt(snkey) + 1).toString()
+                    snkey = (parseInt(snkey) + 5).toString()
 
                 })
                 fa=false
@@ -47,7 +47,7 @@ function live() {
         }
         
     })
-    firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + dt + '/Online/').set(null)
+    // firebase.database().ref(document.getElementById('devices-list').value + '/Audio/' + dt + '/Online/').set(null)
     firebase.database().ref(document.getElementById('devices-list').value + '/settings/record_mode/').set('1')
     var snkey
     var i = 1;
